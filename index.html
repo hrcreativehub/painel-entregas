@@ -147,7 +147,7 @@
     revisao:{label:'Em revisão', cls:'st-revisao'},
     ajustes:{label:'Ajustes', cls:'st-ajustes'},
     aprovado:{label:'Aprovado', cls:'st-aprovado'},
-    entregue:{label:'Entregue', cls:'st-entregue'}
+    entregue:{label:'Feito', cls:'st-entregue'}
   };
   var CHECK = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
@@ -155,7 +155,7 @@
   function statusKey(s){
     var n = norm(s);
     if(!n) return 'aguardando';
-    if(n.indexOf('entreg')===0 || n==='ok' || n==='finalizado' || n==='publicado') return 'entregue';
+    if(n.indexOf('feit')===0 || n.indexOf('entreg')===0 || n==='ok' || n==='finalizado' || n==='publicado' || n==='concluido') return 'entregue';
     if(n.indexOf('aprov')===0) return 'aprovado';
     if(n.indexOf('ajust')===0 || n.indexOf('altera')===0) return 'ajustes';
     if(n.indexOf('revis')>=0 || n.indexOf('enviad')===0) return 'revisao';
