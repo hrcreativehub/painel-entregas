@@ -29,6 +29,12 @@
   .live{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-size:12.5px;color:#E9DCCF;min-height:18px}
   .live i{width:9px;height:9px;border-radius:50%;background:#4CC37A;box-shadow:0 0 0 0 rgba(76,195,122,.6);animation:pulse 2s infinite}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(76,195,122,.55)}70%{box-shadow:0 0 0 9px rgba(76,195,122,0)}100%{box-shadow:0 0 0 0 rgba(76,195,122,0)}}
+.hero-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}
+  .hero-actions .live{margin-top:0}
+  .sheet-btn{display:inline-flex;align-items:center;gap:8px;margin-left:auto;background:var(--orange);color:#fff;font-family:var(--display);font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:10px 16px;border-radius:99px;transition:background .2s}
+  .sheet-btn:hover,.sheet-btn:focus-visible{background:var(--orange-deep)}
+  .sheet-btn:focus-visible{outline:3px solid #F7C28F;outline-offset:2px}
+  .sheet-btn svg{width:15px;height:15px}
   .live[hidden]{display:none}
   /* resumo */
   .summary{display:grid;grid-template-columns:1.3fr 1fr;gap:14px;margin:14px 0 22px}
@@ -94,7 +100,13 @@
     <p class="eyebrow">HR Creative Hub · Painel de entregas</p>
     <h1>Medicina de Portas Abertas</h1>
     <p class="date">Sábado, 24 de outubro · 2ª edição</p>
-    <div class="live" id="live" hidden><i></i><span id="live-text">Ao vivo</span></div>
+    <div class="hero-actions">
+      <div class="live" id="live" hidden><i></i><span id="live-text">Ao vivo</span></div>
+      <a class="sheet-btn" href="https://docs.google.com/spreadsheets/d/1r2H2Ja7RJHYMqEw9d6TnjRoUGBVln1B9moF0r_WkZpQ/edit" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM4 9h16M4 14h16M10 9v11" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        Planilha de status
+      </a>
+    </div>
   </header>
 
   <div class="summary">
@@ -128,18 +140,18 @@
 
   // Dados de reserva: o painel nasce com eles e funciona mesmo sem a planilha.
   var BASE = [
-    {id:'s1', peca:'Story 1 · As portas se abrem', tipo:'Story', responsavel:'João', revisor:'Enilson', revisao:'09:15', final:'09:30', status:'Aguardando', obs:'Publicação até 10h'},
-    {id:'s2', peca:'Story 2 · Mão na massa', tipo:'Story', responsavel:'João', revisor:'Enilson', revisao:'10:45', final:'11:00', status:'Aguardando', obs:'Publicação até 11h30'},
-    {id:'s3', peca:'Story 3 · Enquanto isso, as famílias', tipo:'Story', responsavel:'Gustavo', revisor:'Enilson', revisao:'12:15', final:'12:30', status:'Aguardando', obs:'Publicação até 13h'},
-    {id:'f1', peca:'10 fotos tratadas', tipo:'Fotos', responsavel:'Gabriel', revisor:'', revisao:'', final:'13:30', status:'Aguardando', obs:''},
-    {id:'s4', peca:'Story 4 · Até a próxima edição', tipo:'Story', responsavel:'Gustavo', revisor:'Enilson', revisao:'13:30', final:'14:00', status:'Aguardando', obs:'Publicação até 14h30'},
-    {id:'r1', peca:'Reel 1 · Médico por um dia', tipo:'Reel', responsavel:'João', revisor:'Enilson', revisao:'14:00', final:'14:30', status:'Aguardando', obs:'Publicação no mesmo dia'},
-    {id:'r2', peca:'Reel 2 · O que mudou em mim', tipo:'Reel', responsavel:'Gustavo', revisor:'', revisao:'', final:'14:30', status:'Aguardando', obs:'Sem revisão no dia. Publicação em 26/10'},
-    {id:'r3', peca:'Reel 3 · Da imagem ao diagnóstico', tipo:'Reel', responsavel:'João', revisor:'', revisao:'', final:'15:00', status:'Aguardando', obs:'Sem revisão no dia. Publicação em 27/10'},
-    {id:'v4', peca:'Vídeo 4 · Um dia de portas abertas', tipo:'Vídeo', responsavel:'Gustavo', revisor:'', revisao:'', final:'15:30', status:'Aguardando', obs:'Sem revisão no dia. Publicação em 28/10'},
-    {id:'f2', peca:'Todas as fotos tratadas', tipo:'Fotos', responsavel:'Gabriel', revisor:'', revisao:'', final:'15:30', status:'Aguardando', obs:''}
+    {id:'s1', peca:'Story 1 · As portas se abrem', tipo:'Story', responsavel:'Gustavo', revisor:'Enilson', revisao:'09:15', final:'09:30', status:'Aguardando', obs:'Publicação até 10h', producao:'Lucas', camera:'Eduardo'},
+    {id:'s2', peca:'Story 2 · Mão na massa', tipo:'Story', responsavel:'Gustavo', revisor:'Enilson', revisao:'10:45', final:'11:00', status:'Aguardando', obs:'Publicação até 11h30', producao:'Lucas', camera:'Eduardo'},
+    {id:'s3', peca:'Story 3 · Enquanto isso, as famílias', tipo:'Story', responsavel:'João', revisor:'Enilson', revisao:'12:15', final:'12:30', status:'Aguardando', obs:'Publicação até 13h', producao:'Lucas', camera:'Eduardo'},
+    {id:'f1', peca:'10 fotos tratadas', tipo:'Fotos', responsavel:'Gabriel', revisor:'', revisao:'', final:'13:30', status:'Aguardando', obs:'', producao:'', camera:''},
+    {id:'s4', peca:'Story 4 · Visita guiada', tipo:'Story', responsavel:'João', revisor:'Enilson', revisao:'13:30', final:'14:00', status:'Aguardando', obs:'Publicação até 14h30', producao:'Lucas e Guilherme', camera:'Eduardo e Felipe'},
+    {id:'r1', peca:'Reel 1 · Portas abertas', tipo:'Reel', responsavel:'João', revisor:'Enilson', revisao:'14:00', final:'14:30', status:'Aguardando', obs:'Publicação no mesmo dia', producao:'Lucas', camera:'Eduardo'},
+    {id:'r2', peca:'Reel 2 · O que mudou em mim', tipo:'Reel', responsavel:'João', revisor:'', revisao:'', final:'15:30', status:'Aguardando', obs:'Sem revisão no dia. Publicação em 26/10', producao:'Guilherme', camera:'Felipe'},
+    {id:'r3', peca:'Reel 3 · Da imagem ao diagnóstico', tipo:'Reel', responsavel:'João', revisor:'', revisao:'', final:'16:30', status:'Aguardando', obs:'Sem revisão no dia. Publicação em 27/10', producao:'Lucas', camera:'Eduardo'},
+    {id:'v4', peca:'Vídeo 4 · Diferenciais da formação', tipo:'Vídeo', responsavel:'Gustavo', revisor:'', revisao:'', final:'15:30', status:'Aguardando', obs:'Sem revisão no dia. Publicação em 28/10', producao:'Guilherme e Lucas', camera:'Felipe e Eduardo'},
+    {id:'f2', peca:'Todas as fotos tratadas', tipo:'Fotos', responsavel:'Gabriel', revisor:'', revisao:'', final:'15:30', status:'Aguardando', obs:'', producao:'', camera:''}
   ];
-  var COLS = ['id','peca','tipo','responsavel','revisor','revisao','final','status','obs'];
+  var COLS = ['id','peca','tipo','responsavel','revisor','revisao','final','status','obs','producao','camera'];
 
   var STATUS = {
     aguardando:{label:'Aguardando', cls:'st-aguardando'},
@@ -200,6 +212,8 @@
           '<div class="people">'+
             (it.responsavel ? '<span><b>Entrega</b>'+esc(it.responsavel)+'</span>' : '')+
             (it.revisor ? '<span><b>Revisão</b>'+esc(it.revisor)+'</span>' : '')+
+            (it.producao ? '<span><b>Produção</b>'+esc(it.producao)+'</span>' : '')+
+            (it.camera ? '<span><b>Câmera</b>'+esc(it.camera)+'</span>' : '')+
           '</div>'+
           (it.obs ? '<div class="obs">'+esc(it.obs)+'</div>' : '')+
         '</div>'+
@@ -267,7 +281,7 @@
       o.id = String(o.id||'').trim();
       if(!o.id || norm(o.id)==='id' || !String(o.peca||'').trim()) return;
       o.revisao = hhmm(o.revisao); o.final = hhmm(o.final);
-      ['peca','tipo','responsavel','revisor','status','obs'].forEach(function(k){ o[k]=String(o[k]==null?'':o[k]).trim(); });
+      ['peca','tipo','responsavel','revisor','status','obs','producao','camera'].forEach(function(k){ o[k]=String(o[k]==null?'':o[k]).trim(); });
       out.push(o);
     });
     if(!out.length) return;
