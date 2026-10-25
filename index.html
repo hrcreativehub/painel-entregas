@@ -19,12 +19,13 @@
   --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--preto);color:var(--creme);font-family:var(--sans);font-size:15px;line-height:1.45;overflow-x:hidden}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden;overflow-x:clip}
+body{margin:0;background:var(--preto);color:var(--creme);font-family:var(--sans);font-size:15px;line-height:1.45;overflow-x:hidden;overflow-x:clip;max-width:100%}
 a{color:inherit}
 button{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--laranja-claro);outline-offset:3px}
-.glow{position:absolute;left:50%;top:-260px;width:900px;max-width:180vw;height:620px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(255,107,0,.30),rgba(255,107,0,.08) 55%,rgba(27,19,13,0) 100%);pointer-events:none;z-index:0}
+.glow-wrap{position:absolute;left:0;right:0;top:0;height:720px;overflow:hidden;pointer-events:none;z-index:0}
+.glow{position:absolute;left:50%;top:-260px;width:900px;height:620px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(255,107,0,.30),rgba(255,107,0,.08) 55%,rgba(27,19,13,0) 100%);pointer-events:none;z-index:0}
 .wrap{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:20px 16px 64px;display:flex;flex-direction:column;gap:22px}
 .mono{font-family:var(--mono)}
 .label{font-family:var(--mono);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
@@ -53,6 +54,22 @@ h1{margin:0;font-weight:900;font-size:clamp(36px,7vw,64px);line-height:.98;lette
 .chipbtn.primary{background:var(--laranja);border-color:var(--laranja);color:var(--preto)}
 .chipbtn.primary:hover{background:var(--laranja-claro)}
 .chipbtn svg{width:15px;height:15px;flex:0 0 auto}
+
+/* dias */
+.days{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 6px;margin:-2px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.days::-webkit-scrollbar{display:none}
+.days[hidden]{display:none}
+.day{flex:0 0 auto;scroll-snap-align:start;min-width:132px;display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:12px 16px;border-radius:18px;border:1px solid var(--line-2);background:var(--ink-2);cursor:pointer;text-align:left}
+.day:hover{border-color:#6A4E3A}
+.day[aria-selected="true"]{background:var(--creme);border-color:var(--creme);color:var(--preto)}
+.day .dl{font-weight:900;font-size:18px;letter-spacing:-.01em;line-height:1}
+.day .dd{font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.06em;color:var(--dim);text-transform:uppercase}
+.day[aria-selected="true"] .dd{color:#5E5148}
+.day .dp{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-weight:700;font-size:11px;color:var(--muted)}
+.day[aria-selected="true"] .dp{color:var(--laranja-texto)}
+.day .dp i{width:7px;height:7px;border-radius:50%;background:#FF3B30}
+.day .dp i.ok{background:var(--ok)}
+.day .dp i.wait{background:var(--line-2)}
 
 /* destaque */
 .feature{display:flex;flex-wrap:wrap;gap:14px;align-items:stretch}
@@ -99,7 +116,7 @@ h2{margin:0;font-weight:900;font-size:30px;letter-spacing:-.02em}
 .times{display:flex;flex-direction:column;gap:3px;min-width:84px}
 .times b{font-family:var(--mono);font-weight:700;font-size:22px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .times small{font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
-.body{flex:1 1 220px;min-width:0;display:flex;flex-direction:column;gap:5px}
+.body{flex:1 1 200px;min-width:0;overflow-wrap:anywhere;display:flex;flex-direction:column;gap:5px}
 .titleline{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .type{font-family:var(--mono);font-weight:700;font-size:10.5px;letter-spacing:.12em;padding:4px 9px;border-radius:99px;text-transform:uppercase}
 .type.story{color:var(--rev);background:rgba(245,196,81,.14)}
@@ -121,7 +138,7 @@ h2{margin:0;font-weight:900;font-size:30px;letter-spacing:-.02em}
 .detail{padding:0 20px 20px;display:flex;flex-direction:column;gap:16px}
 .detail[hidden]{display:none}
 .sep{height:1px;background:var(--line)}
-.resumo{margin:0;font-size:15px;color:var(--creme-2)}
+.resumo{overflow-wrap:anywhere;margin:0;font-size:15px;color:var(--creme-2)}
 .team{display:flex;flex-wrap:wrap;gap:8px}
 .tag{display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border-radius:99px;background:var(--panel-2);font-size:13.5px}
 .tag b{display:inline-flex;align-items:center;justify-content:center;height:26px;padding:0 8px;border-radius:99px;background:#3D2B1F;font-family:var(--mono);font-weight:700;font-size:9.5px;letter-spacing:.1em;color:var(--laranja-claro)}
@@ -145,26 +162,33 @@ h2{margin:0;font-weight:900;font-size:30px;letter-spacing:-.02em}
 .foot b{font-family:var(--mono);letter-spacing:.14em;color:var(--laranja)}
 
 /* janela */
-dialog{border:0;padding:0;background:transparent;color:var(--preto);max-width:min(460px,calc(100vw - 32px));width:100%;max-height:86vh}
-dialog::backdrop{background:rgba(12,8,5,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.sheet{background:var(--creme);border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.55);max-height:86vh;overflow-y:auto}
+dialog{position:fixed;inset:0;margin:auto;border:0;padding:0;background:transparent;color:var(--preto);width:calc(100% - 24px);max-width:460px;height:fit-content;max-height:86vh;max-height:86dvh}
+dialog::backdrop{background:rgba(12,8,5,.45);backdrop-filter:blur(1.5px);-webkit-backdrop-filter:blur(1.5px)}
+.sheet{background:var(--creme);border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.5);max-height:86vh;max-height:86dvh;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain}
 .sheet-head{padding:22px 22px 6px;display:flex;align-items:flex-start;gap:12px;position:sticky;top:0;background:var(--creme)}
-.sheet-head div{flex:1;display:flex;flex-direction:column;gap:4px}
+.sheet-head div{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
 .sheet-head .label{color:#A84E04}
-.sheet-head h3{margin:0;font-weight:900;font-size:22px;line-height:1.15;letter-spacing:-.01em}
+.sheet-head h3{overflow-wrap:anywhere;margin:0;font-weight:900;font-size:22px;line-height:1.15;letter-spacing:-.01em}
 .close{flex:0 0 auto;width:44px;height:44px;border-radius:50%;border:0;background:var(--preto);color:var(--creme);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
 .close svg{width:16px;height:16px}
 .rows{list-style:none;margin:0;padding:12px 22px 24px}
 .rows li{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid #E8DCCB}
 .rows li:last-child{border-bottom:0}
 .rows .n{flex:0 0 auto;font-family:var(--mono);font-weight:700;font-size:13px;color:var(--laranja-texto);padding-top:2px}
-.rows .t{display:flex;flex-direction:column;gap:2px}
+.rows .t{flex:1;min-width:0;overflow-wrap:anywhere;display:flex;flex-direction:column;gap:2px}
 .rows strong{font-weight:700;font-size:15.5px}
 .rows em{font-style:normal;font-size:13.5px;color:#5E5148}
 .rows a{color:var(--preto);text-decoration:underline;text-decoration-color:var(--laranja);text-underline-offset:3px;font-weight:700;font-size:15.5px}
 
 @media (max-width:560px){
+  .wrap{gap:18px}
   .hero{padding:28px 20px 24px}
+  .head{gap:10px 12px}
+  .times{min-width:0;flex-direction:row;align-items:baseline;gap:10px}
+  .right{order:2;margin-left:auto}
+  .body{order:3;flex:1 1 100%}
+  .chipbtn{padding:0 14px}
+  .count .n{font-size:34px}
   .next .time{font-size:46px}
   .head{padding:16px}
   .detail{padding:0 16px 16px}
@@ -173,7 +197,7 @@ dialog::backdrop{background:rgba(12,8,5,.72);backdrop-filter:blur(6px);-webkit-b
 </style>
 </head>
 <body>
-<div class="glow" aria-hidden="true"></div>
+<div class="glow-wrap" aria-hidden="true"><div class="glow"></div></div>
 <div class="wrap">
   <div class="topbar">
     <span class="brand">HR CREATIVE HUB</span>
@@ -188,6 +212,8 @@ dialog::backdrop{background:rgba(12,8,5,.72);backdrop-filter:blur(6px);-webkit-b
   </header>
 
   <nav class="shortcuts" id="shortcuts" aria-label="Atalhos do evento"></nav>
+
+  <div class="days" id="days" role="tablist" aria-label="Dias do evento" hidden></div>
 
   <section class="feature" aria-label="Resumo">
     <div class="next">
@@ -238,8 +264,11 @@ dialog::backdrop{background:rgba(12,8,5,.72);backdrop-filter:blur(6px);-webkit-b
 <script>
 /* =====================================================================
    CONFIGURAÇÃO DO EVENTO
-   Para um evento novo: duplique a planilha de status, troque o SHEET_ID
+   Para um evento novo: duplique a planilha de status, troque o sheetId
    e edite este bloco. O código abaixo dele não muda.
+   Vários dias: liste cada dia em days. Cada peça vai para um dia pela
+   coluna "dia" da planilha (d1, d2... ou Dia 1, Dia 2...) ou pelo campo
+   dia em PECAS. Evento de um dia só: deixe um único item em days.
    Conteúdo de cada peça (imagens, entrevistados, locais, links) fica em
    PECAS, pelo mesmo id da planilha. Se a planilha tiver colunas com os
    nomes imagens, entrevistados, locais, roteiro, guia ou exportado, elas
@@ -251,10 +280,13 @@ var F = 'https://drive.google.com/file/d/';
 var CONFIG = {
   sheetId: '1r2H2Ja7RJHYMqEw9d6TnjRoUGBVln1B9moF0r_WkZpQ',
   refreshMs: 30000,
-  eventDate: '2026-10-24',
-  eyebrow: 'Controle de entregas · IDOR · 24.10.2026',
+  eyebrow: 'Controle de entregas · IDOR',
   title: 'Medicina de Portas Abertas',
-  subtitle: '2ª edição · Sábado, das 8h30 às 12h30 · Unidade Centro',
+  subtitle: '2ª edição · Unidade Centro',
+  days: [
+    { id: 'd1', label: 'Dia 1', date: '2026-10-24', info: 'Sábado, 24/10 · das 8h30 às 12h30' },
+    { id: 'd2', label: 'Dia 2', date: '2026-10-25', info: 'Domingo, 25/10 · teste de evento com dois dias' }
+  ],
   shortcuts: [
     { label: 'Ordem do dia', url: F + '1Wr18psk8vKhCx_squUx4uuMNxPbkyXiv/view', primary: true },
     { label: 'Roteiros', list: [
@@ -270,33 +302,33 @@ var CONFIG = {
 var ROT = { stories: F + '1LoLjJsh5LycqkZcxNrFWolsbZ_6Jr03F/view', reels: F + '1q2qKGXMEzRO7ug5-GhsRyev8laDRtVBn/view', v4: F + '1jD5-Clz5flg2Lp1pzFsVH507UbvnQIg7/view' };
 var GUIA = F + '1Mw1Twb1m4WSHzV7pzG4NIIB7cRhX9SgA/view';
 var PECAS = {
-  s1: { resumo: 'A chegada como estreia: um grupo selecionado entra num espaço que normalmente está fechado.', roteiro: ROT.stories, exportado: D + '18E3KggBPto9bOMRhdjp_QtALNUoMhwef',
+  s1: { dia: 'd1', resumo: 'A chegada como estreia: um grupo selecionado entra num espaço que normalmente está fechado.', roteiro: ROT.stories, exportado: D + '18E3KggBPto9bOMRhdjp_QtALNUoMhwef',
     imagens: ['Fachada com movimento de chegada', 'Pulseiras e crachás por cor nas mãos', 'Estudantes e famílias entrando', 'Elevador abrindo no andar', 'Auditório lotado :: Do fundo para o palco'],
     locais: ['Térreo e fachada :: Chegada, a partir das 8h30', 'Auditório :: Recepção dos estudantes, 8h30 às 9h', 'Térreo :: Café dos responsáveis'] },
-  s2: { resumo: 'O auge das oficinas em cortes rápidos, quase sem texto. Aqui, a Medicina ganha vida na prática.', roteiro: ROT.stories, exportado: D + '1-TgG7wqZdvHJylAhVe5kEeekEgUM7mIe',
+  s2: { dia: 'd1', resumo: 'O auge das oficinas em cortes rápidos, quase sem texto. Aqui, a Medicina ganha vida na prática.', roteiro: ROT.stories, exportado: D + '1-TgG7wqZdvHJylAhVe5kEeekEgUM7mIe',
     imagens: ['Close de mãos comprimindo o manequim de RCP', 'Coração em 3D na mesa Anatomage :: Com mãos de estudantes no quadro', 'Estudante de óculos 3D no ecocardiograma', 'Olho no microscópio e bancada de análises clínicas', 'Morfologia :: Do paciente à célula'],
     locais: ['8º andar · oficinas :: Rodízios 1 e 2, das 9h30 às 10h45', 'Coração, Anatomia, Análises clínicas e Morfologia'] },
-  s3: { resumo: 'Enquanto os estudantes estavam nas oficinas, os responsáveis conheciam outro IDOR. É o Story que fala com os pais.', roteiro: ROT.stories, exportado: D + '13GhQI1a2NQeditZBu7Ff3hLDeeTU8Top',
+  s3: { dia: 'd1', resumo: 'Enquanto os estudantes estavam nas oficinas, os responsáveis conheciam outro IDOR. É o Story que fala com os pais.', roteiro: ROT.stories, exportado: D + '13GhQI1a2NQeditZBu7Ff3hLDeeTU8Top',
     imagens: ['Pesquisadores apresentando no 6º andar', 'Paciente virtual, gestante com bebê e simulação no 7º', 'Peças e Anatomage no 8º :: Com os estudantes nas oficinas ao fundo', 'Detalhes :: Mão anotando, celular fotografando a sala, rostos atentos'],
     locais: ['6º andar :: Pesquisa', '7º andar :: Simulação e paciente virtual', '8º andar :: Peças e Anatomage', 'Tour dos responsáveis :: Das 10h45 às 12h05'] },
-  f1: { resumo: 'As dez melhores fotos da manhã, tratadas e prontas para o IDOR publicar.', exportado: D + '1eDJgB98HexWyB1EFf5PmR_9daVaQR8Dv' },
-  s4: { resumo: 'O encerramento como clímax e o convite para quem ficou de fora agendar uma visita guiada.', roteiro: ROT.stories, exportado: D + '15O2bmzuO__tvxVwqin3Oz9hFnJzcKUUU',
+  f1: { dia: 'd1', resumo: 'As dez melhores fotos da manhã, tratadas e prontas para o IDOR publicar.', exportado: D + '1eDJgB98HexWyB1EFf5PmR_9daVaQR8Dv' },
+  s4: { dia: 'd1', resumo: 'O encerramento como clímax e o convite para quem ficou de fora agendar uma visita guiada.', roteiro: ROT.stories, exportado: D + '15O2bmzuO__tvxVwqin3Oz9hFnJzcKUUU',
     imagens: ['Auditório lotado na fala final', 'Brindes', 'Estudantes reencontrando os pais', 'Foto de grupo com todos', 'Foto no banner do 7º andar'],
     locais: ['Auditório :: Encerramento, das 12h15 às 12h45', '7º andar :: Banner'] },
-  r1: { resumo: 'A manhã vista por quem fez e por quem viu: das quatro oficinas aos responsáveis encantados com a estrutura.', roteiro: ROT.reels, guia: GUIA, exportado: D + '1Uo8b34te4tClLuTZlMG4VWCuuX2bc_k4',
+  r1: { dia: 'd2', resumo: 'A manhã vista por quem fez e por quem viu: das quatro oficinas aos responsáveis encantados com a estrutura.', roteiro: ROT.reels, guia: GUIA, exportado: D + '1Uo8b34te4tClLuTZlMG4VWCuuX2bc_k4',
     imagens: ['Primeira compressão no manequim de RCP, em close :: É a abertura do Reel', 'Pulseira por cor, crachá, elevador abrindo e auditório cheio', 'Mão no equipamento e reação no rosto, em cada oficina :: Coração, Anatomia, Análises clínicas e Morfologia', 'Responsáveis encantados no tour :: Fotografando a Anatomage, olhando a simulação do 7º, perguntando aos pesquisadores do 6º', 'Reencontro no auditório e foto de grupo'],
     entrevistados: ['Estudante na saída da oficina :: E1 · o que acabou de fazer, até 4 segundos', 'Pai ou mãe :: R2 ou R1 · o que fotografou ou não esperava ver, até 5 segundos'],
     locais: ['8º andar · oficinas :: Rodízios das 9h30 às 12h05', '6º, 7º e 8º andares :: Tour dos responsáveis, das 10h45 às 12h05', 'Auditório :: Reencontro, a partir das 12h15'] },
-  r2: { resumo: 'Alunas contam o que viveram e o que mudou na visão delas sobre a Medicina. Fecha com um responsável e um convite.', roteiro: ROT.reels, guia: GUIA, exportado: D + '1ulhHWSGBG6ZAD9jRzA1kIwcg89GZ4W7D',
+  r2: { dia: 'd2', resumo: 'Alunas contam o que viveram e o que mudou na visão delas sobre a Medicina. Fecha com um responsável e um convite.', roteiro: ROT.reels, guia: GUIA, exportado: D + '1ulhHWSGBG6ZAD9jRzA1kIwcg89GZ4W7D',
     imagens: ['Cada aluna entrevistada em ação :: Na oficina que ela citou', 'Plano aberto das oficinas em andamento', 'Responsáveis no tour, ouvindo e fotografando', 'Reencontro da aluna com o pai ou a mãe :: No auditório'],
     entrevistados: ['4 a 6 alunas :: E2, E3 e E4 · nome completo e foto do crachá', 'Pai :: R1 ou R3 · pelo menos 3 pais homens no total do dia'],
     locais: ['8º andar · trocas das oficinas :: 10h05, 10h45 e 11h25', 'Fim do tour dos responsáveis :: A partir das 11h40', 'Auditório :: Reencontro, a partir das 12h15'] },
-  v4: { resumo: 'Cinco diferenciais, uma voz: a coordenação apresenta o que torna a formação singular, o evento mostra e um estudante confirma.', roteiro: ROT.v4, guia: GUIA, exportado: D + '11PdkrDDAH7LTWdjKtsPtmp7grtCoCtdz',
+  v4: { dia: 'd2', resumo: 'Cinco diferenciais, uma voz: a coordenação apresenta o que torna a formação singular, o evento mostra e um estudante confirma.', roteiro: ROT.v4, guia: GUIA, exportado: D + '11PdkrDDAH7LTWdjKtsPtmp7grtCoCtdz',
     imagens: ['Abertura :: Fachada, chegada, pulseiras por cor, auditório cheio', 'Prática ampliada :: Compressões, ecocardiograma, peças, professor orientando', 'Ciência, pesquisa e inovação :: 6º andar, análises clínicas, lâmina no microscópio', 'IA, tecnologia e saúde digital :: Anatomage, óculos 3D, simulação do 7º', 'Mobilidade acadêmica e intercâmbio :: Mapa-múndi das parcerias, em detalhe', 'Trajetória individualizada :: Professor orientando de perto, biblioteca, cenário do 2º andar'],
     entrevistados: ['Alessandra Thompson ou Fernanda Lima :: C1 em cinco blocos · prioridade absoluta do dia', 'Estudante que passou pelas quatro oficinas :: E6 · saída do rodízio 4, às 12h05'],
     locais: ['Tour dos responsáveis :: Janela mais provável para o C1, das 10h45 às 12h05', '6º andar, Anatomage e mapa-múndi :: Um bloco do C1 em cada lugar, se der', '2º andar :: Biblioteca e cenário'] },
-  f2: { resumo: 'O registro completo do evento, com mais de 100 fotos tratadas.', exportado: D + '1HveD1jrQSiTHdb2_4WDNlb-oGObu6KUN' },
-  r3: { resumo: 'A tecnologia como processo, da imagem ao diagnóstico: anatomia em 3D, microscopia, paciente virtual e simulação.', roteiro: ROT.reels, guia: GUIA, exportado: D + '1UM2c5CPDjK6dZfLwVKfkWAee_gelR4Hy',
+  f2: { dia: 'd2', resumo: 'O registro completo do evento, com mais de 100 fotos tratadas.', exportado: D + '1HveD1jrQSiTHdb2_4WDNlb-oGObu6KUN' },
+  r3: { dia: 'd2', resumo: 'A tecnologia como processo, da imagem ao diagnóstico: anatomia em 3D, microscopia, paciente virtual e simulação.', roteiro: ROT.reels, guia: GUIA, exportado: D + '1UM2c5CPDjK6dZfLwVKfkWAee_gelR4Hy',
     imagens: ['Mesa Anatomage com mãos de estudantes :: Base da inserção do coração em 3D', 'Estudante de óculos 3D no ecocardiograma', 'Lâmina no microscópio e bancada de análises clínicas', 'Paciente virtual e simulação no 7º :: Tela e rostos no mesmo quadro', 'Mapa-múndi das parcerias do IDOR :: Plano fechado e detalhes'],
     entrevistados: ['Professor de Anatomia ou Coração :: P2 · o que a tecnologia muda na formação', 'Professor ou pesquisador do 6º :: P3 · ou a coordenação, C2', 'Coordenação diante do mapa-múndi :: C3 · como a Medicina IDOR se conecta com o mundo', 'Dois estudantes :: E5 · o que não imaginavam que existia numa faculdade'],
     locais: ['8º andar :: Oficinas de Anatomia e Coração', '7º andar :: Simulação e paciente virtual', '6º andar :: Pesquisa', 'Mapa-múndi :: Localizar logo cedo, às 8h'] }
@@ -318,7 +350,7 @@ var BASE = [
 /* ===================== Daqui para baixo não precisa mexer ===================== */
 (function(){
   var COLS = ['id','peca','tipo','responsavel','revisor','revisao','final','status','obs','producao','camera'];
-  var EXTRA = ['imagens','entrevistados','locais','roteiro','guia','exportado','resumo'];
+  var EXTRA = ['imagens','entrevistados','locais','roteiro','guia','exportado','resumo','dia'];
   var STATUS = {
     aguardando:{label:'Aguardando',cls:'st-aguardando'},
     edicao:{label:'Em edição',cls:'st-edicao'},
@@ -339,6 +371,8 @@ var BASE = [
   var items = BASE.slice();
   var person = 'Todos';
   var openId = null;
+  var DAYS = (CONFIG.days && CONFIG.days.length) ? CONFIG.days : [{ id:'d1', label:'Dia 1', date:'', info:'' }];
+  var dayId = null;
   var lastLive = null;
 
   function $(id){ return document.getElementById(id); }
@@ -372,7 +406,7 @@ var BASE = [
   }
   function split(s){ var p=String(s).split('::'); return { t:p[0].trim(), d:(p[1]||'').trim() }; }
   function typeCls(t){ var n=norm(t); return n==='video'?'video':(n==='reel'?'reel':(n==='fotos'||n==='foto'?'fotos':'story')); }
-  function names(it){ return [it.responsavel,it.revisor,it.producao,it.camera].join(' e ').split(/\s+e\s+|,/).map(function(x){return x.trim();}).filter(Boolean); }
+  function names(it){ var out=[]; [it.responsavel,it.revisor,it.producao,it.camera].forEach(function(f){ String(f||'').split(/\s+e\s+|,|\s*\/\s*/).forEach(function(x){ x=x.trim(); if(x && out.indexOf(x)<0) out.push(x); }); }); return out; }
   function content(it){
     var c = PECAS[it.id] || {};
     var o = {};
@@ -385,6 +419,44 @@ var BASE = [
       var p={}; new Intl.DateTimeFormat('en-CA',{timeZone:'America/Sao_Paulo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()).forEach(function(x){p[x.type]=x.value;});
       return { date:p.year+'-'+p.month+'-'+p.day, min:(+p.hour%24)*60+(+p.minute) };
     }catch(e){ return { date:'', min:0 }; }
+  }
+
+  function dayOf(it){
+    var raw = (it.dia!=null && String(it.dia).trim()!=='') ? it.dia : ((PECAS[it.id]||{}).dia || '');
+    var n = norm(raw);
+    if(n){
+      for(var i=0;i<DAYS.length;i++){
+        var d = DAYS[i];
+        if(n===norm(d.id) || n===norm(d.label) || n===String(i+1) || n==='dia '+(i+1) || n===norm(d.date)) return d.id;
+        if(d.date && n===d.date.slice(8,10)+'/'+d.date.slice(5,7)) return d.id;
+      }
+    }
+    return DAYS[0].id;
+  }
+  function dayById(id){ for(var i=0;i<DAYS.length;i++){ if(DAYS[i].id===id) return DAYS[i]; } return DAYS[0]; }
+  function pickDefaultDay(){
+    var fromHash = (location.hash||'').replace('#','');
+    if(fromHash && DAYS.some(function(d){ return d.id===fromHash; })) return fromHash;
+    var t = today().date;
+    for(var i=0;i<DAYS.length;i++){ if(DAYS[i].date===t) return DAYS[i].id; }
+    for(var j=0;j<DAYS.length;j++){ var id=DAYS[j].id; if(items.some(function(it){ return dayOf(it)===id && !isDone(it); })) return id; }
+    return DAYS[0].id;
+  }
+  function renderDays(){
+    var box = $('days');
+    if(DAYS.length<2){ box.hidden = true; return; }
+    box.hidden = false;
+    var t = today().date;
+    box.innerHTML = DAYS.map(function(d){
+      var its = items.filter(function(it){ return dayOf(it)===d.id; });
+      var dn = its.filter(isDone).length;
+      var live = d.date && d.date===t;
+      var dotCls = live ? '' : (its.length && dn===its.length ? 'ok' : 'wait');
+      var dt = d.date ? d.date.slice(8,10)+'/'+d.date.slice(5,7) : '';
+      return '<button type="button" class="day" role="tab" data-day="'+esc(d.id)+'" aria-selected="'+(d.id===dayId)+'">'+
+        '<span class="dl">'+esc(d.label)+'</span><span class="dd">'+esc(dt)+'</span>'+
+        '<span class="dp"><i class="'+dotCls+'" aria-hidden="true"></i>'+(live?'Hoje · ':'')+dn+' de '+its.length+'</span></button>';
+    }).join('');
   }
 
   function renderStatic(){
@@ -402,14 +474,19 @@ var BASE = [
   function renderRec(){
     var t = today(), el = $('rec'), txt;
     var upd = lastLive ? ' · ' + lastLive.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'}) : '';
-    if(t.date === CONFIG.eventDate){ txt = 'REC · Ao vivo' + upd; el.classList.add('is-live'); }
-    else if(t.date && t.date < CONFIG.eventDate){ txt = 'Em breve'; el.classList.remove('is-live'); }
+    var first = DAYS[0].date, isToday = DAYS.some(function(d){ return d.date===t.date; });
+    if(isToday){ txt = 'REC · Ao vivo' + upd; el.classList.add('is-live'); }
+    else if(t.date && first && t.date < first){ txt = 'Em breve'; el.classList.remove('is-live'); }
     else { txt = 'Encerrado' + upd; el.classList.remove('is-live'); }
     $('rec-text').textContent = txt;
   }
 
   function render(){
-    var all = sorted();
+    if(!dayId) dayId = pickDefaultDay();
+    var cur = dayById(dayId);
+    $('subtitle').textContent = CONFIG.subtitle + (cur.info ? ' · ' + cur.info : '');
+    renderDays();
+    var all = sorted().filter(function(it){ return dayOf(it)===dayId; });
     var done = all.filter(isDone).length;
     var next = null;
     for(var i=0;i<all.length;i++){ if(!isDone(all[i])){ next = all[i]; break; } }
@@ -439,7 +516,7 @@ var BASE = [
 
     // linha do tempo
     var vis = all.filter(function(it){ return person==='Todos' || names(it).indexOf(person)>=0; });
-    if(!vis.length){ $('timeline').innerHTML = '<p class="empty">Nenhuma entrega com '+esc(person)+' neste evento.</p>'; return; }
+    if(!vis.length){ $('timeline').innerHTML = '<p class="empty">'+(all.length ? 'Nenhuma entrega com '+esc(person)+' neste dia.' : 'Nenhuma entrega cadastrada neste dia.')+'</p>'; return; }
     $('timeline').innerHTML = vis.map(function(it){
       var k = statusKey(it.status), st = STATUS[k], c = content(it);
       var isOpen = openId===it.id, isNext = next && next.id===it.id;
@@ -476,7 +553,7 @@ var BASE = [
 
   function relative(t){
     var n = today();
-    if(n.date!==CONFIG.eventDate) return '';
+    if(n.date!==dayById(dayId).date) return '';
     var diff = mins(t) - n.min;
     if(diff>0 && diff<=180) return ' · em ' + (diff>=60 ? Math.floor(diff/60)+'h'+pad(diff%60) : diff+' min');
     if(diff<=0 && diff>-240) return ' · horário passou';
@@ -496,13 +573,18 @@ var BASE = [
   dlg.addEventListener('click', function(e){ if(e.target===dlg) closeDialog(); });
 
   document.addEventListener('click', function(e){
-    var t = e.target.closest('[data-toggle],[data-person],[data-modal],[data-short]');
+    var t = e.target.closest('[data-toggle],[data-person],[data-modal],[data-short],[data-day]');
     if(!t) return;
     if(t.hasAttribute('data-toggle')){
       var id = t.getAttribute('data-toggle');
       openId = openId===id ? null : id;
       render();
       var b = document.querySelector('[data-toggle="'+id+'"]'); if(b) b.focus();
+    } else if(t.hasAttribute('data-day')){
+      dayId = t.getAttribute('data-day'); person = 'Todos'; openId = null;
+      try{ history.replaceState(null,'','#'+dayId); }catch(err){}
+      render();
+      var sel = document.querySelector('[data-day="'+dayId+'"]'); if(sel){ sel.focus(); }
     } else if(t.hasAttribute('data-person')){
       person = t.getAttribute('data-person'); render();
     } else if(t.hasAttribute('data-modal')){
