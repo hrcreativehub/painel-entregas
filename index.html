@@ -124,6 +124,8 @@ h2{margin:0;font-weight:900;font-size:30px;letter-spacing:-.02em}
 .type.reel{color:var(--laranja-claro);background:rgba(255,107,0,.16)}
 .type.video{color:var(--creme);background:rgba(250,244,231,.12)}
 .type.fotos{color:#9FC6FF;background:rgba(120,170,255,.14)}
+.type.ad{color:#5FD38C;background:rgba(95,211,140,.13)}
+.times b.notime{font-size:15px;letter-spacing:0;color:var(--muted)}
 .piece{font-weight:800;font-size:17.5px;line-height:1.2}
 .by{font-size:13.5px;color:var(--muted)}
 .right{display:flex;align-items:center;gap:12px;margin-left:auto}
@@ -347,6 +349,42 @@ var BASE = [
   {id:'s3',peca:'Story 3 · A última pergunta',tipo:'Story',responsavel:'João',revisor:'IDOR',revisao:'13:45',final:'14:15',status:'Aguardando',obs:'Publicação pelo IDOR às 14h15, no destaque Eventos',producao:'Lucas',camera:'Felipe e Eduardo',dia:'d3'},
   {id:'r2',peca:'Reel 2 · O que fica em aberto',tipo:'Reel',responsavel:'João',revisor:'IDOR',revisao:'15:00',final:'16:00',status:'Aguardando',obs:'Revisor responde até 15h45. O IDOR decide se publica às 16h ou às 19h',producao:'Lucas',camera:'Felipe e Eduardo',dia:'d3'}
 ];
+/* ADS DE RESIDÊNCIA E FELLOWSHIP (HR-2026-IDOR-0071, cliente Paula).
+   Gravação no evento, sem horário; edição e entrega depois do evento.
+   Dia provisório (3 na quinta e 3 na sexta) até a Paula passar a agenda.
+   Os links abaixo apontam para arquivos fechados (só a equipe, por e-mail)
+   e por isso continuam no painel mesmo com LIBERADO = false. */
+var ADS_PASTA = D + '1t2d_0Eg8PaFEjVtyUTBVyYRBYMrTzD1r';
+var ADS_GUIA = F + '1gSkF7CasLQO1yJLcqPY_hYGJ9SvNNAhR/view';
+var ADS_ENTREGAS = D + '1FS0RLf6JUs25J7VdJJ3m6cT27_x05Tv7';
+var ADS_SET = ['Entrevistado em pé, crachá à vista :: Vertical 9:16, gravado em 4K', 'Mesmo ponto de set para os seis ads :: Enquadramento e luz iguais', 'Duas tentativas por pergunta :: Resposta inteira, sem começar com "e", "então" ou "também"', 'Convite em duas versões :: A: "as inscrições estão abertas". B: neutra'];
+var ADS_LOCAL = ['Ponto de set dos ads :: Definir com a Paula. Um só lugar para os seis', 'Coffee break :: Entrevista de 10 a 12 min, horário a confirmar com a Paula'];
+var ADS = [
+  { id:'a1', dia:'d1', peca:'Ad 1 · Tiago Machuca · Alta complexidade em rede', doc:'1WHXEjDaf-TqI9vdgyLo49_ymNyZp3VIU',
+    resumo:'Abre a série. O diretor da área conta o que um residente ou fellow vive numa semana dentro da rede de alta complexidade respiratória da Rede D\'Or.',
+    ent:'Dr. Tiago Noguchi Machuca :: Diretor de Medicina Respiratória de Alta Complexidade e Transplante da Rede D\'Or · perguntas C01.1 a C01.5 e C01.G' },
+  { id:'a2', dia:'d1', peca:'Ad 2 · Eduardo Fontena · O caso inteiro', doc:'1FFH45YCxxGqcAW1DTc339hpq3KjEkR4w',
+    resumo:'Residência em Cirurgia Torácica (RJ): o residente acompanha o caso inteiro, do ambulatório ao pós-operatório.',
+    ent:'Dr. Eduardo Fontena :: Coordenador da Residência Médica em Cirurgia Torácica (RJ) · perguntas C02.1 a C02.5 e C02.G' },
+  { id:'a3', dia:'d1', peca:'Ad 3 · Caio Bianchi · Lado a lado', doc:'1JHMsldM5tbLGQV0LPvsu3RR6oIWvhcVY',
+    resumo:'A preceptoria da Residência em Cirurgia Torácica (RJ) contada por quem ensina ao lado do residente no centro cirúrgico.',
+    ent:'Caio Cesar Bianchi :: Preceptor da Residência Médica em Cirurgia Torácica (RJ) · perguntas C03.1 a C03.5 e C03.G · presença a confirmar' },
+  { id:'a4', dia:'d2', peca:'Ad 4 · Gabriel Santiago · Uma semana de Pneumologia no Rio', doc:'1aYR4tFAyXjugko-_HEEG0ixl9Pn_kmoe',
+    resumo:'Residência em Pneumologia (RJ): a semana do residente entre UTI respiratória, broncoscopia e ambulatório.',
+    ent:'Dr. Gabriel Santiago :: Coordenador da Residência Médica em Pneumologia (RJ) · perguntas C04.1 a C04.5 e C04.G' },
+  { id:'a5', dia:'d2', peca:'Ad 5 · André Albuquerque · Três hospitais, uma residência', doc:'1JnMl3ST9KLBipc_6dn8mG0C5zUfPT9-C',
+    resumo:'Residência em Pneumologia (SP): o que o residente faz em cada um dos três hospitais São Luiz.',
+    ent:'Prof. Dr. André Albuquerque :: Coordenador da Residência Médica em Pneumologia (SP) · perguntas C05.1 a C05.5 e C05.G' },
+  { id:'a6', dia:'d2', peca:'Ad 6 · Alessandro Wasum · O próximo passo do cirurgião torácico', doc:'1Wf_8rFcTvV5h9LeuGOPsv5iIgpuQjATY',
+    resumo:'Fellowship em Cirurgia Torácica Minimamente Invasiva e Robótica (SP): o que muda na carreira de quem já é cirurgião torácico. Convite só na versão neutra.',
+    ent:'Dr. Alessandro Wasum Mariani :: Coordenador do Fellowship em Cirurgia Torácica Minimamente Invasiva e Robótica (SP) · perguntas C06.1 a C06.5 e C06.G · presença a confirmar' }
+];
+ADS.forEach(function(a){
+  PECAS[a.id] = { dia:a.dia, resumo:a.resumo, imagens:ADS_SET, entrevistados:[a.ent], locais:ADS_LOCAL, roteiro:F + a.doc + '/view', guia:ADS_GUIA, exportado:ADS_ENTREGAS };
+  BASE.push({ id:a.id, peca:a.peca, tipo:'Ad', responsavel:'', revisor:'Paula', revisao:'', final:'', status:'Aguardando',
+    obs:'Gravação no evento, sem horário definido. Dia provisório até a Paula confirmar a agenda. Edição e entrega depois do evento.',
+    producao:'Guilherme', camera:'Eduardo', dia:a.dia });
+});
 
 /* ===================== Daqui para baixo não precisa mexer ===================== */
 (function(){
@@ -399,6 +437,8 @@ var BASE = [
     if(n.indexOf('edi')===0||n.indexOf('em edi')===0) return 'edicao';
     return 'aguardando';
   }
+  function timed(it){ return !!(it.final||it.revisao); }
+  function crew(it){ return [it.producao,it.camera].filter(Boolean).join(' e ') || 'equipe'; }
   function isDone(it){ var k=statusKey(it.status); return k==='entregue'; }
   function list(v){
     if(Array.isArray(v)) return v;
@@ -406,7 +446,7 @@ var BASE = [
     return String(v).split('|').map(function(x){ return x.trim(); }).filter(Boolean);
   }
   function split(s){ var p=String(s).split('::'); return { t:p[0].trim(), d:(p[1]||'').trim() }; }
-  function typeCls(t){ var n=norm(t); return n==='video'?'video':(n==='reel'?'reel':(n==='fotos'||n==='foto'?'fotos':'story')); }
+  function typeCls(t){ var n=norm(t); return n==='video'?'video':(n==='reel'?'reel':(n==='ad'||n==='ads'?'ad':(n==='fotos'||n==='foto'?'fotos':'story'))); }
   function names(it){ var out=[]; [it.responsavel,it.revisor,it.producao,it.camera].forEach(function(f){ String(f||'').split(/\s+e\s+|,|\s*\/\s*/).forEach(function(x){ x=x.trim(); if(x && out.indexOf(x)<0) out.push(x); }); }); return out; }
   function content(it){
     var c = PECAS[it.id] || {};
@@ -490,7 +530,8 @@ var BASE = [
     var all = sorted().filter(function(it){ return dayOf(it)===dayId; });
     var done = all.filter(isDone).length;
     var next = null;
-    for(var i=0;i<all.length;i++){ if(!isDone(all[i])){ next = all[i]; break; } }
+    for(var i=0;i<all.length;i++){ if(!isDone(all[i]) && timed(all[i])){ next = all[i]; break; } }
+    if(!next){ for(var i2=0;i2<all.length;i2++){ if(!isDone(all[i2])){ next = all[i2]; break; } } }
 
     // destaque
     if(next){
@@ -500,6 +541,7 @@ var BASE = [
       $('next-when').textContent = useRev ? 'Revisão · final ' + next.final : (next.revisao ? 'Final' : 'Entrega');
       $('next-piece').textContent = next.peca;
       $('next-meta').textContent = 'Edição com ' + (next.responsavel||'equipe') + ' · ' + STATUS[sk].label.toLowerCase() + relative(useRev?next.revisao:next.final);
+      if(!timed(next)){ $('next-time').textContent = 'A definir'; $('next-when').textContent = 'Gravação sem horário'; $('next-meta').textContent = 'Gravação com ' + crew(next) + ' · ' + STATUS[sk].label.toLowerCase(); }
     } else {
       $('next-time').textContent = 'OK';
       $('next-when').textContent = 'Dia concluído';
@@ -522,7 +564,7 @@ var BASE = [
       var k = statusKey(it.status), st = STATUS[k], c = content(it);
       var isOpen = openId===it.id, isNext = next && next.id===it.id;
       var cls = 'card'+(isOpen?' is-open':'')+(isNext?' is-next':'')+(k==='entregue'?' is-done':'');
-      var note = it.revisao ? 'Revisão ' + it.revisao : (k==='entregue' ? 'Entregue' : 'Entrega direta');
+      var note = it.revisao ? 'Revisão ' + it.revisao : (k==='entregue' ? 'Entregue' : (timed(it) ? 'Entrega direta' : 'Após o evento'));
       var team = [['Edição',it.responsavel],['Revisão',it.revisor],['Produção',it.producao],['Câmera',it.camera]].filter(function(p){return p[1];})
         .map(function(p){ return '<span class="tag"><b>'+p[0].toUpperCase()+'</b>'+esc(p[1])+'</span>'; }).join('');
       var tiles = ['imagens','entrevistados','locais'].map(function(kind){
@@ -537,8 +579,8 @@ var BASE = [
       else docs.push('<span class="doc off">Exportado · após a entrega</span>');
       return '<article class="'+cls+'" id="card-'+esc(it.id)+'"><span class="dot" aria-hidden="true"></span>'+
         '<button type="button" class="head" data-toggle="'+esc(it.id)+'" aria-expanded="'+isOpen+'" aria-controls="det-'+esc(it.id)+'">'+
-          '<span class="times"><b>'+esc(it.final||it.revisao)+'</b><small>'+esc(note)+'</small></span>'+
-          '<span class="body"><span class="titleline"><span class="type '+typeCls(it.tipo)+'">'+esc(it.tipo)+'</span><span class="piece">'+esc(it.peca)+'</span></span><span class="by">Edição com '+esc(it.responsavel||'equipe')+'</span></span>'+
+          '<span class="times">'+(timed(it)?'<b>'+esc(it.final||it.revisao)+'</b>':'<b class="notime">Sem horário</b>')+'<small>'+esc(note)+'</small></span>'+
+          '<span class="body"><span class="titleline"><span class="type '+typeCls(it.tipo)+'">'+esc(it.tipo)+'</span><span class="piece">'+esc(it.peca)+'</span></span><span class="by">'+(timed(it)?'Edição com '+esc(it.responsavel||'equipe'):'Gravação com '+esc(crew(it)))+'</span></span>'+
           '<span class="right"><span class="pill '+st.cls+'"><i aria-hidden="true"></i>'+st.label+'</span><span class="chev" aria-hidden="true">'+CHEV+'</span></span>'+
         '</button>'+
         '<div class="detail" id="det-'+esc(it.id)+'"'+(isOpen?'':' hidden')+'>'+
