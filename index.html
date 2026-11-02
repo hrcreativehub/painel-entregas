@@ -181,6 +181,11 @@ dialog::backdrop{background:rgba(12,8,5,.45);backdrop-filter:blur(1.5px);-webkit
 .rows .t{flex:1;min-width:0;overflow-wrap:anywhere;display:flex;flex-direction:column;gap:2px}
 .rows strong{font-weight:700;font-size:15.5px}
 .rows em{font-style:normal;font-size:13.5px;color:#5E5148}
+.rows li.person{flex-direction:column;align-items:center;text-align:center;gap:10px;padding:16px 0}
+.rows li.person .t{flex:0 1 auto;align-items:center}
+.rows li.person .n{display:none}
+.rows .ph{width:112px;height:128px;border-radius:18px;object-fit:cover;object-position:50% 12%;background:#E8DCCB;display:block}
+.rows .ph.ini{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:28px;color:var(--laranja-texto);letter-spacing:.04em}
 .rows a{color:var(--preto);text-decoration:underline;text-decoration-color:var(--laranja);text-underline-offset:3px;font-weight:700;font-size:15.5px}
 
 @media (max-width:560px){
@@ -605,6 +610,18 @@ ADS.forEach(function(a){
 
   // janela
   var dlg = $('dlg');
+  /* Fotos oficiais do site do IDOR (link direto, nada copiado para este repositório). */
+  var FOTO_BASE = 'https://www.rededorsaoluiz.com.br/instituto/idor/wp-content/uploads/';
+  var FOTOS = [
+    ['machuca', FOTO_BASE + '2025/12/Dr.-Tiago-Machuca-2-935x1024.jpg'],
+    ['fontena', FOTO_BASE + '2021/12/Eduardo-Fontena.png'],
+    ['santiago', FOTO_BASE + '2025/10/Gabriel-Ferreira-Santiago.png'],
+    ['albuquerque', FOTO_BASE + '2026/10/Andre-albuquerque.png'],
+    ['wasum', FOTO_BASE + '2025/12/Dr.-Alessandro-Wasum-Mariani-e1786455964920.jpg'],
+    ['bianchi', '']
+  ];
+  function fotoDe(nome){ var n = norm(nome); for(var i=0;i<FOTOS.length;i++){ if(n.indexOf(FOTOS[i][0])>=0) return FOTOS[i]; } return null; }
+  function iniciais(nome){ var w = String(nome).split(',')[0].replace(/^(dr|dra|prof)\.?\s+/ig,'').replace(/^(dr|dra|prof)\.?\s+/ig,'').split(/\s+/).filter(Boolean); return ((w[0]||'')[0]||'') + ((w.length>1?w[w.length-1]:'')[0]||''); }
   function openDialog(kindLabel, title, rowsHtml){
     $('dlg-kind').textContent = kindLabel;
     $('dlg-title').textContent = title;
@@ -633,8 +650,17 @@ ADS.forEach(function(a){
     } else if(t.hasAttribute('data-modal')){
       var kind = t.getAttribute('data-modal'), it = items.filter(function(x){return x.id===t.getAttribute('data-id');})[0];
       if(!it) return;
-      var rows = list(content(it)[kind]).map(function(r,i){ var p=split(r); return '<li><span class="n">'+pad(i+1)+'</span><span class="t"><strong>'+esc(p.t)+'</strong>'+(p.d?'<em>'+esc(p.d)+'</em>':'')+'</span></li>'; }).join('');
+      var rows = list(content(it)[kind]).map(function(r,i){ var p=split(r);
+        var f = kind==='entrevistados' ? fotoDe(p.t) : null;
+        if(f){
+          var pic = f[1] ? '<img class="ph" src="'+esc(f[1])+'" alt="Foto de '+esc(p.t)+'" referrerpolicy="no-referrer" loading="lazy" data-ini="'+esc(iniciais(p.t))+'">' : '<span class="ph ini" aria-hidden="true">'+esc(iniciais(p.t))+'</span>';
+          return '<li class="person">'+pic+'<span class="t"><strong>'+esc(p.t)+'</strong>'+(p.d?'<em>'+esc(p.d)+'</em>':'')+'</span></li>';
+        }
+        return '<li><span class="n">'+pad(i+1)+'</span><span class="t"><strong>'+esc(p.t)+'</strong>'+(p.d?'<em>'+esc(p.d)+'</em>':'')+'</span></li>'; }).join('');
       openDialog(KIND[kind][0], it.peca, rows);
+      Array.prototype.forEach.call(document.querySelectorAll('#dlg-rows img.ph'), function(im){
+        im.addEventListener('error', function(){ var sp = document.createElement('span'); sp.className = 'ph ini'; sp.setAttribute('aria-hidden','true'); sp.textContent = im.getAttribute('data-ini') || ''; if(im.parentNode) im.parentNode.replaceChild(sp, im); });
+      });
     } else if(t.hasAttribute('data-short')){
       var s = CONFIG.shortcuts[+t.getAttribute('data-short')];
       var rows2 = s.list.map(function(r,i){ return '<li><span class="n">'+pad(i+1)+'</span><span class="t"><a href="'+esc(r[2])+'" target="_blank" rel="noopener">'+esc(r[0])+'</a>'+(r[1]?'<em>'+esc(r[1])+'</em>':'')+'</span></li>'; }).join('');
