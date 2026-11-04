@@ -286,6 +286,7 @@ dialog::backdrop{background:rgba(12,8,5,.45);backdrop-filter:blur(1.5px);-webkit
 var D = 'https://drive.google.com/drive/folders/';
 var F = 'https://drive.google.com/file/d/';
 var S = 'https://docs.google.com/spreadsheets/d/';
+var G = 'https://docs.google.com/document/d/';
 /* LIBERADO: deixe false enquanto a pasta do projeto estiver aberta como
    "qualquer pessoa com o link pode editar". Com false, o painel mostra
    horários e conteúdo, mas não publica nenhum link do Drive nem lê a
@@ -297,7 +298,7 @@ var CONFIG = {
   refreshMs: 30000,
   eyebrow: 'Controle de entregas · IDOR',
   title: 'Fronteiras da Medicina Respiratória III',
-  subtitle: 'Faculdade IDOR, Unidade Centro',
+  subtitle: 'Faculdade IDOR, Unidade Centro · revisão: Caio Pomin',
   days: [
     { id: 'd1', label: 'Quinta', date: '2026-11-05', info: 'Pré-simpósio, 05/11 · das 8h às 16h' },
     { id: 'd2', label: 'Sexta', date: '2026-11-06', info: 'Simpósio, dia 1, 06/11 · das 8h30 às 16h30' },
@@ -310,36 +311,36 @@ var CONFIG = {
       ['Ordem do dia · sábado, 07/11', 'Simpósio, dia 2', S + '1gF501wYES0wPW-UlRnS3_qgocuJYFQyPKzG4HPX_sHI/edit']
     ] },
     { label: 'Roteiros', list: [
-      ['Roteiro de Stories V1', 'Stories 1, 2 e 3', F + '1tGLkxiLoR4OaeiD9rzOVM1Zk7dlWqWZ6/view'],
-      ['Roteiro de Reels V1', 'Reels 1 e 2', 'https://docs.google.com/document/d/1GvmekHquJOmtS6zpkTASq2imWg6ou9VrrFYZEzYjskg/edit'],
-      ['Roteiro do Aftermovie V1', 'Captação nos três dias, entrega depois do evento', F + '1SitPrSWH0Ed4ZSH275x0XjGdg3nQnVHb/view']
+      ['Roteiro de Stories V2', 'Stories 1, 2 e 3', G + '182Tls-y0NdQWilHZnKwLSjiy6Hrq6qZrp-WyglLSyLE/edit'],
+      ['Roteiro de Reels V2', 'Reels 1 e 2', G + '1oEmptSBmeSTU59qpWt7co2KghhjnzvXdqjBw9kNqqZo/edit'],
+      ['Roteiro do Aftermovie V2', 'Captação nos três dias, entrega depois do evento', G + '1SJzpQSAz-dM6ZGmdLPvrI_3GTsbIidiEYA0IRLm4HA8/edit']
     ] },
-    { label: 'Guia de perguntas', url: F + '1tD3zGsiz2-dK7A1ZPBI66ejXdyiWiLfi/view' },
+    { label: 'Guia de perguntas', url: G + '1AE7UIuffxpH9YL0HBJutIR1OOPZH7tS2udL82msLeMM/edit' },
     { label: 'Planilha de status', url: S + '1vY_jmYfA5UzlbhWsrJwQLVvOBgKP9POh4VcTGYcRN0c/edit' },
     { label: 'Pasta de entregas', url: D + '1Ak6gzb264Czg5Xz05vLzJp5gvNx19CNz' }
   ]
 };
-var ROT = { stories: F + '1tGLkxiLoR4OaeiD9rzOVM1Zk7dlWqWZ6/view', reels: 'https://docs.google.com/document/d/1GvmekHquJOmtS6zpkTASq2imWg6ou9VrrFYZEzYjskg/edit' };
-var GUIA = F + '1tD3zGsiz2-dK7A1ZPBI66ejXdyiWiLfi/view';
+var ROT = { stories: G + '182Tls-y0NdQWilHZnKwLSjiy6Hrq6qZrp-WyglLSyLE/edit', reels: G + '1oEmptSBmeSTU59qpWt7co2KghhjnzvXdqjBw9kNqqZo/edit' };
+var GUIA = G + '1AE7UIuffxpH9YL0HBJutIR1OOPZH7tS2udL82msLeMM/edit';
 var PECAS = {
-  s1: { dia: 'd1', resumo: 'O que um auditório não dá: mão no broncoscópio, tela do EBUS, criossonda e instrutor orientando. É o dia mais visual dos três e precisa render a melhor imagem do evento.', roteiro: ROT.stories, guia: GUIA, exportado: D + '1VcTUOULkxa_PWHaAGkhD1JiGJTCyImGW',
-    imagens: ['Mãos de um médico no broncoscópio sobre o simulador :: Plano bem fechado, foco nas mãos. É a abertura do Story', 'Tela do EBUS ou da navegação com imagem em movimento', 'Criossonda ou stent em detalhe', 'Instrutor orientando o grupo em volta da estação :: Plano médio', 'Plano geral do espaço com as seis estações', 'A imagem mais bonita do dia, em plano fixo :: Fundo da enquete'],
-    entrevistados: ['Bruno Baena ou Leonardo Palermo :: P05.1 · opcional, para o aftermovie, entre as estações e só se não atrapalhar a atividade'],
-    locais: ['Área de simuladores :: Atividade prática, das 14h às 15h50. Prioridade: EBUS, criobiópsia e navegação', 'Auditório :: Reserva: abertura às 8h30 e Tumor Board às 11h20, se a prática atrasar'] },
-  s2: { dia: 'd2', resumo: 'O único momento em que toda a plateia está junta antes de sentar, com a primeira pergunta da grade na tela e uma caixa de pergunta para quem assiste de fora.', roteiro: ROT.stories, exportado: D + '1tTmpuAVLFv4Kkj0F0xSCPCUtWKH2m78O',
-    imagens: ['Fachada com gente chegando ou porta da sala abrindo :: Movimento curto no gimbal', 'Credenciamento, crachá na mão, welcome coffee :: Três cortes', 'Plateia tomando lugar', 'Mesa de abertura e primeiro módulo :: Plano médio da mesa, corte para a plateia', 'Plateia de costas olhando para a mesa :: Fundo da caixa de pergunta'],
+  s1: { dia: 'd1', resumo: 'O que um auditório não dá: mão no broncoscópio, tela do EBUS, criossonda e instrutor orientando. Com a fala do Dr. Gabriel Santiago sobre o objetivo do pré-simpósio.', roteiro: ROT.stories, guia: GUIA, exportado: D + '1VcTUOULkxa_PWHaAGkhD1JiGJTCyImGW',
+    imagens: ['Mãos de um médico no broncoscópio sobre o simulador :: Plano bem fechado, foco nas mãos. É a abertura do Story', 'Dr. Gabriel Santiago em plano médio :: Fala sobre o objetivo do pré-simpósio, gravada de manhã', 'Tela do EBUS, criossonda e instrutor orientando o grupo :: Com o nome de cada técnica e o plano geral das seis estações', 'A imagem mais bonita do dia, em plano fixo :: Fundo da enquete'],
+    entrevistados: ['Dr. Gabriel Santiago :: P05.1 · logo depois da abertura (8h40) ou no coffee das 10h', 'Dr. Tiago Machuca e Dr. Gabriel Santiago :: Gravação do aftermovie no almoço, das 12h40 às 14h'],
+    locais: ['Área de simuladores :: Atividade prática, das 14h às 15h50. Prioridade: EBUS, criobiópsia e navegação', 'Auditório :: Abertura às 8h30 e Tumor Board às 11h20'] },
+  s2: { dia: 'd2', resumo: 'O único momento em que toda a plateia está junta antes de sentar, com uma caixa de pergunta para quem assiste de fora.', roteiro: ROT.stories, exportado: D + '1tTmpuAVLFv4Kkj0F0xSCPCUtWKH2m78O',
+    imagens: ['Fachada com gente chegando ou porta da sala abrindo :: Movimento curto no gimbal', 'Credenciamento, crachá na mão, welcome coffee :: Três cortes', 'Mesa de abertura e primeiro módulo :: Plano médio da mesa, corte para a plateia', 'Plateia de costas olhando para a mesa :: Fundo da caixa de pergunta'],
     locais: ['Fachada e entrada :: Antes e durante a chegada, a partir das 8h15', 'Credenciamento e welcome coffee :: Das 8h30 às 8h45', 'Auditório :: Abertura às 8h45 e Módulo 1 às 9h'] },
-  r1: { dia: 'd2', resumo: 'Abre com uma pergunta tirada da grade e passa o dia respondendo a ela com imagem e três falas curtas. Não cobre os quatro módulos: uma pergunta, uma cena de intervalo e três pessoas.', roteiro: ROT.reels, guia: GUIA, exportado: D + '1m9ZsGNUEBfM3jH1Iou4GPgh33-4yDVcQ',
-    imagens: ['Sala cheia a partir do fundo ou mesa do módulo, 3 s parado :: É o hook. O Lucas escolhe no dia entre o Módulo 1 e o Módulo 4', 'Fachada, porta, credenciamento e crachá na mão', 'Plateia sentando e mesa de abertura às 8h45', 'Em cada módulo: mesa, palestrante, plateia e detalhe de anotação :: Sem slide com dado legível', 'Telão e estande dos simpósios satélite :: Só identidade visual, sem produto', 'Coffee break: conversas, grupos, xícara e crachá', 'Encerramento do dia :: Mesa, aplauso, sala se esvaziando'],
-    entrevistados: ['Tiago Machuca :: P06.1 · coffee das 10h55', 'Convidado de fora do Rio :: P06.3 · nome e cidade a confirmar com o IDOR', 'Gabriel Santiago :: P06.4 · coffee das 15h10, para a fala olhar para o dia 2', 'Tiago Machuca, opcional :: P06.2 · para o aftermovie, se houver tempo'],
-    locais: ['Fachada e entrada :: Antes das 8h30, vazia e com público chegando', 'Auditório :: Módulos 1 a 4, das 9h às 16h30', 'Corredor ou lateral da sala :: Sonoras nos coffees das 10h55 e das 15h10', 'Auditório :: Encerramento às 16h30'] },
-  s3: { dia: 'd3', resumo: 'Fecha os três dias com a sala ainda na memória de quem esteve lá: a última pergunta da grade em lettering e uma enquete sobre o tema que mais marcou.', roteiro: ROT.stories, exportado: D + '1yAdWoOgwt4f-pSnd5fsb0VQnxz74dPfN',
-    imagens: ['Mesa do Módulo 6, oncologia torácica :: Moderação e palestrante, corte para a plateia', 'Palestrante no púlpito ou plateia anotando :: Plano fixo', 'Encerramento: coordenação na mesa, aplauso e plateia de pé', 'Abraços na saída', 'Sala se esvaziando ou mesa vazia :: Fundo da enquete'],
-    locais: ['Auditório :: Satélite e Módulo 6, a partir das 10h45', 'Auditório :: Encerramento às 13h05. Estar na sala desde 12h55'] },
-  r2: { dia: 'd3', resumo: 'Fecha a história dos três dias: abre na última pergunta da grade, mostra a oncologia torácica, revisita os três dias em montagem rápida e termina com o que fica em aberto até a próxima edição.', roteiro: ROT.reels, guia: GUIA, exportado: D + '1jg3jiFqCitsOEl05JrndmFFyEhfMBHpm',
-    imagens: ['Mesa do Módulo 6 ou plateia de frente, 3 s parado :: É o hook', 'Chegada do sábado, mais vazia :: Das 8h15 às 8h30, contraste com a sexta', 'Módulo 5 e satélite :: Mesa, palestrante e plateia', 'Módulo 6, prioridade do dia :: Moderação, palestrantes, plateia, telão e detalhe de anotação', 'Encerramento: aplauso, abraços e saída', 'Sala vazia em plano fixo depois que o público sair :: Último plano do aftermovie', 'Montagem dos três dias :: O João separa o material de quinta e sexta'],
-    entrevistados: ['Clarissa Baldotto :: P07.1 · coffee das 10h25, antes do módulo dela. Alternativa: Gustavo Prado', 'Gabriel Santiago :: P07.2 · logo após o encerramento', 'Tiago Machuca :: P07.3 · logo após o encerramento, se não foi captada na sexta'],
-    locais: ['Entrada :: Chegada, das 8h15 às 8h30', 'Auditório :: Módulo 5 às 8h30 e Módulo 6 a partir das 10h45', 'Corredor ou lateral da sala :: Sonoras no coffee das 10h25 e depois das 13h05', 'Auditório :: Encerramento às 13h05, desde 12h55'] }
+  r1: { dia: 'd2', resumo: 'Resumo objetivo do primeiro dia: o que teve de programação, os temas e por que importam, com duas falas de coordenadores do evento.', roteiro: ROT.reels, guia: GUIA, exportado: D + '1m9ZsGNUEBfM3jH1Iou4GPgh33-4yDVcQ',
+    imagens: ['Sala cheia a partir do fundo ou mesa do Módulo 1, 3 s parado :: É o hook, com o lettering do dia', 'Fachada, credenciamento e abertura às 8h45', 'Em cada módulo: mesa, palestrante, plateia e detalhe de anotação :: Sem slide com dado legível', 'Plateia perguntando :: Perguntas às 12h15 e às 15h', 'Coffee break: conversas, grupos, xícara e crachá', 'Encerramento do dia :: Mesa, aplauso, sala se esvaziando'],
+    entrevistados: ['Dr. João Pantoja :: P06.1 · no almoço, a partir de 12h55, sobre TEP. Também grava o aftermovie', 'Dr. Tiago Machuca :: P06.2 · coffee das 15h10, sobre transplante pulmonar'],
+    locais: ['Fachada e entrada :: Antes das 8h30, vazia e com público chegando', 'Auditório :: Módulos 1 a 4, das 9h às 16h30', 'Corredor ou lateral da sala :: Falas no almoço e no coffee das 15h10', 'Simpósios satélite :: Não filmar telão nem estande (patrocinadores não liberados)'] },
+  s3: { dia: 'd3', resumo: 'Fecha os três dias com a sala ainda na memória de quem esteve lá, com uma enquete sobre o tema que mais marcou.', roteiro: ROT.stories, exportado: D + '1yAdWoOgwt4f-pSnd5fsb0VQnxz74dPfN',
+    imagens: ['Mesa do Módulo 6, oncologia torácica :: Moderação e palestrante, corte para a plateia', 'Palestrante no púlpito ou plateia anotando :: Plano fixo, sem lettering', 'Encerramento: coordenação na mesa, aplauso e plateia de pé', 'Sala se esvaziando ou mesa vazia :: Fundo da enquete'],
+    locais: ['Auditório :: Módulo 6, a partir das 11h15', 'Auditório :: Encerramento às 13h05. Estar na sala desde 12h45'] },
+  r2: { dia: 'd3', resumo: 'Resumo objetivo do segundo dia, doenças intersticiais e oncologia torácica, com duas falas de coordenadores e uma montagem rápida dos três dias.', roteiro: ROT.reels, guia: GUIA, exportado: D + '1jg3jiFqCitsOEl05JrndmFFyEhfMBHpm',
+    imagens: ['Mesa do Módulo 6 ou plateia de frente, 3 s parado :: É o hook, com o lettering do dia', 'Módulo 5 e Módulo 6 :: Mesa, palestrante, plateia e perguntas às 9h45 e às 12h55', 'Encerramento: aplauso, abraços e saída', 'Sala vazia em plano fixo depois que o público sair :: Último plano do aftermovie', 'Montagem dos três dias :: O João separa o material de quinta e sexta'],
+    entrevistados: ['Dr. André Albuquerque :: P07.1 · coffee das 10h25. Também grava o aftermovie depois das 13h05', 'Dr. Gabriel Santiago :: P07.2 · coffee das 10h25 ou logo após o encerramento'],
+    locais: ['Entrada :: Chegada, das 8h15 às 8h30', 'Auditório :: Módulo 5 às 8h30 e Módulo 6 a partir das 11h15', 'Corredor ou lateral da sala :: Falas no coffee das 10h25 e depois das 13h05', 'Simpósios satélite :: Não filmar telão nem estande (patrocinadores não liberados)'] }
 };
 if(!LIBERADO){
   CONFIG.sheetId = '';
@@ -348,11 +349,11 @@ if(!LIBERADO){
 }
 /* Dados de reserva: o painel funciona mesmo se a planilha não responder. */
 var BASE = [
-  {id:'s1',peca:'Story 1 · Mãos na estação',tipo:'Story',responsavel:'João',revisor:'IDOR',revisao:'15:30',final:'16:00',status:'Aguardando',obs:'Publicação pelo IDOR às 16h, no destaque Eventos',producao:'Lucas',camera:'Felipe e Eduardo',dia:'d1'},
-  {id:'s2',peca:'Story 2 · A sala se enche',tipo:'Story',responsavel:'João',revisor:'IDOR',revisao:'10:00',final:'10:30',status:'Aguardando',obs:'Publicação pelo IDOR às 10h30, no destaque Eventos',producao:'Lucas',camera:'Felipe e Eduardo',dia:'d2'},
-  {id:'r1',peca:'Reel 1 · A pergunta do dia',tipo:'Reel',responsavel:'João',revisor:'IDOR',revisao:'18:00',final:'19:00',status:'Aguardando',obs:'Revisor responde até 18h45. Publicação às 19h',producao:'Lucas',camera:'Felipe e Eduardo',dia:'d2'},
-  {id:'s3',peca:'Story 3 · A última pergunta',tipo:'Story',responsavel:'João',revisor:'IDOR',revisao:'13:45',final:'14:15',status:'Aguardando',obs:'Publicação pelo IDOR às 14h15, no destaque Eventos',producao:'Lucas',camera:'Felipe e Eduardo',dia:'d3'},
-  {id:'r2',peca:'Reel 2 · O que fica em aberto',tipo:'Reel',responsavel:'João',revisor:'IDOR',revisao:'15:00',final:'16:00',status:'Aguardando',obs:'Revisor responde até 15h45. O IDOR decide se publica às 16h ou às 19h',producao:'Lucas',camera:'Felipe e Eduardo',dia:'d3'}
+  {id:'s1',peca:'Story 1 · Mãos na estação',tipo:'Story',responsavel:'João',revisor:'Caio Pomin',revisao:'15:30',final:'16:00',status:'Aguardando',obs:'Com fala do Dr. Gabriel Santiago. Publicação pelo IDOR às 16h, no destaque Eventos',producao:'Lucas',camera:'Felipe e Eduardo',dia:'d1'},
+  {id:'s2',peca:'Story 2 · A sala se enche',tipo:'Story',responsavel:'João',revisor:'Caio Pomin',revisao:'10:00',final:'10:30',status:'Aguardando',obs:'Publicação pelo IDOR às 10h30, no destaque Eventos',producao:'Lucas',camera:'Felipe e Eduardo',dia:'d2'},
+  {id:'r1',peca:'Reel 1 · O dia 1 do Fronteiras',tipo:'Reel',responsavel:'João',revisor:'Caio Pomin',revisao:'18:00',final:'19:00',status:'Aguardando',obs:'Caio responde até 18h45. Publicação às 19h',producao:'Lucas',camera:'Felipe e Eduardo',dia:'d2'},
+  {id:'s3',peca:'Story 3 · Encerramento',tipo:'Story',responsavel:'João',revisor:'Caio Pomin',revisao:'13:45',final:'14:15',status:'Aguardando',obs:'Publicação pelo IDOR às 14h15, no destaque Eventos',producao:'Lucas',camera:'Felipe e Eduardo',dia:'d3'},
+  {id:'r2',peca:'Reel 2 · O dia 2 e o encerramento',tipo:'Reel',responsavel:'João',revisor:'Caio Pomin',revisao:'15:00',final:'16:00',status:'Aguardando',obs:'Caio responde até 15h45. Publicação às 16h',producao:'Lucas',camera:'Felipe e Eduardo',dia:'d3'}
 ];
 /* ADS DE RESIDÊNCIA E FELLOWSHIP (HR-2026-IDOR-0071, cliente Paula).
    Gravação no evento, sem horário; edição e entrega depois do evento.
