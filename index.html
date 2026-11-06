@@ -301,7 +301,7 @@ var CONFIG = {
   subtitle: 'Faculdade IDOR, Unidade Centro · revisão: Caio Pomin',
   days: [
     { id: 'd1', label: 'Quinta', date: '2026-11-05', info: 'Pré-simpósio, 05/11 · das 8h às 16h' },
-    { id: 'd2', label: 'Sexta', date: '2026-11-06', info: 'Simpósio, dia 1, 06/11 · das 8h30 às 16h30' },
+    { id: 'd2', label: 'Sexta', date: '2026-11-06', info: 'Simpósio, dia 1, 06/11 · das 8h30 às 16h30 · Gravar participantes para o Story 3 nos coffees e no almoço' },
     { id: 'd3', label: 'Sábado', date: '2026-11-07', info: 'Simpósio, dia 2, 07/11 · das 8h30 às 13h05' }
   ],
   shortcuts: [
@@ -335,9 +335,10 @@ var PECAS = {
     imagens: ['Sala cheia a partir do fundo ou mesa do Módulo 1, 3 s parado :: É o hook, com o lettering do dia', 'Fachada, credenciamento e abertura às 8h45', 'Em cada módulo: mesa, palestrante, plateia e detalhe de anotação :: Sem slide com dado legível', 'Plateia perguntando :: Perguntas às 12h15 e às 15h', 'Coffee break: conversas, grupos, xícara e crachá', 'Encerramento do dia :: Mesa, aplauso, sala se esvaziando'],
     entrevistados: ['Dr. João Pantoja :: P06.1 · no almoço, a partir de 12h55, sobre TEP. Também grava o aftermovie', 'Dr. Tiago Machuca :: P06.2 · coffee das 15h10, sobre transplante pulmonar'],
     locais: ['Fachada e entrada :: Antes das 8h30, vazia e com público chegando', 'Auditório :: Módulos 1 a 4, das 9h às 16h30', 'Corredor ou lateral da sala :: Falas no almoço e no coffee das 15h10', 'Simpósios satélite :: Não filmar telão nem estande (patrocinadores não liberados)'] },
-  s3: { dia: 'd3', resumo: 'Fecha os três dias com a sala ainda na memória de quem esteve lá, com uma enquete sobre o tema que mais marcou.', roteiro: ROT.stories, exportado: D + '1yAdWoOgwt4f-pSnd5fsb0VQnxz74dPfN',
-    imagens: ['Mesa do Módulo 6, oncologia torácica :: Moderação e palestrante, corte para a plateia', 'Palestrante no púlpito ou plateia anotando :: Plano fixo, sem lettering', 'Encerramento: coordenação na mesa, aplauso e plateia de pé', 'Sala se esvaziando ou mesa vazia :: Fundo da enquete'],
-    locais: ['Auditório :: Módulo 6, a partir das 11h15', 'Auditório :: Encerramento às 13h05. Estar na sala desde 12h45'] },
+  s3: { dia: 'd3', resumo: 'Qual é a sua área? Participantes dizem a sua área de atuação olhando para a câmera, para mostrar as várias especialidades numa sala só. Pedido do IDOR em 05/11; o encerramento fica com o Reel 2. Gravação na sexta e no sábado.', roteiro: ROT.stories, guia: GUIA, exportado: D + '1yAdWoOgwt4f-pSnd5fsb0VQnxz74dPfN',
+    imagens: ['Sala cheia a partir do fundo :: Abertura, com a pergunta Qual é a sua área?', 'Participantes olhando para a lente, cerca de 3 s cada :: Mesmo enquadramento para todos, plano médio fechado', 'Plano geral da plateia :: Fecho, com Muitas áreas. Uma sala só.', 'Plateia de costas olhando para a mesa :: Fundo da enquete'],
+    entrevistados: ['12 a 15 participantes, de áreas diferentes :: S3.1 · Qual é a sua área de atuação? Usar de 6 a 8 no Story', 'Antes da resposta :: Nome completo e cidade ditos para a câmera e foto do crachá', 'Áreas a buscar :: Pneumologia, cirurgia torácica, terapia intensiva, oncologia, radiologia e patologia', 'Opcional :: S3.2 · Em uma palavra, o que o Fronteiras traz para a sua área?'],
+    locais: ['Sexta, coffee breaks e almoço :: 10h55, almoço e 15h10, depois das falas dos coordenadores', 'Sábado, coffee break :: 10h25, depois das falas P07.1 e P07.2', 'Longe do balcão do coffee :: Fundo neutro ou com a identidade do evento, sem patrocinador'] },
   r2: { dia: 'd3', resumo: 'Resumo objetivo do segundo dia, doenças intersticiais e oncologia torácica, com duas falas de coordenadores e uma montagem rápida dos três dias.', roteiro: ROT.reels, guia: GUIA, exportado: D + '1jg3jiFqCitsOEl05JrndmFFyEhfMBHpm',
     imagens: ['Mesa do Módulo 6 ou plateia de frente, 3 s parado :: É o hook, com o lettering do dia', 'Módulo 5 e Módulo 6 :: Mesa, palestrante, plateia e perguntas às 9h45 e às 12h55', 'Encerramento: aplauso, abraços e saída', 'Sala vazia em plano fixo depois que o público sair :: Último plano do aftermovie', 'Montagem dos três dias :: O João separa o material de quinta e sexta'],
     entrevistados: ['Dr. André Albuquerque :: P07.1 · coffee das 10h25. Também grava o aftermovie depois das 13h05', 'Dr. Gabriel Santiago :: P07.2 · coffee das 10h25 ou logo após o encerramento'],
@@ -353,7 +354,7 @@ var BASE = [
   {id:'s1',peca:'Story 1 · Mãos na estação',tipo:'Story',responsavel:'João',revisor:'Caio Pomin',revisao:'15:30',final:'16:00',status:'Aguardando',obs:'Com fala do Dr. Gabriel Santiago. Publicação pelo IDOR às 16h, no destaque Eventos',producao:'Lucas',camera:'Felipe e Eduardo',dia:'d1'},
   {id:'s2',peca:'Story 2 · A sala se enche',tipo:'Story',responsavel:'João',revisor:'Caio Pomin',revisao:'10:00',final:'10:30',status:'Aguardando',obs:'Publicação pelo IDOR às 10h30, no destaque Eventos',producao:'Lucas',camera:'Felipe e Eduardo',dia:'d2'},
   {id:'r1',peca:'Reel 1 · O dia 1 do Fronteiras',tipo:'Reel',responsavel:'João',revisor:'Caio Pomin',revisao:'18:00',final:'19:00',status:'Aguardando',obs:'Caio responde até 18h45. Publicação às 19h',producao:'Lucas',camera:'Felipe e Eduardo',dia:'d2'},
-  {id:'s3',peca:'Story 3 · Encerramento',tipo:'Story',responsavel:'João',revisor:'Caio Pomin',revisao:'13:45',final:'14:15',status:'Aguardando',obs:'Publicação pelo IDOR às 14h15, no destaque Eventos',producao:'Lucas',camera:'Felipe e Eduardo',dia:'d3'},
+  {id:'s3',peca:'Story 3 · Qual é a sua área?',tipo:'Story',responsavel:'João',revisor:'Caio Pomin',revisao:'12:00',final:'12:30',status:'Aguardando',obs:'Participantes dizem a sua área de atuação (pedido do IDOR em 05/11). Gravação na sexta e no sábado. Horário sugerido pela HR, a confirmar com o Caio. Publicação pelo IDOR no destaque Eventos',producao:'Lucas',camera:'Felipe e Eduardo',dia:'d3'},
   {id:'r2',peca:'Reel 2 · O dia 2 e o encerramento',tipo:'Reel',responsavel:'João',revisor:'Caio Pomin',revisao:'15:00',final:'16:00',status:'Aguardando',obs:'Caio responde até 15h45. Publicação às 16h',producao:'Lucas',camera:'Felipe e Eduardo',dia:'d3'}
 ];
 /* ADS DE RESIDÊNCIA E FELLOWSHIP (HR-2026-IDOR-0071, cliente Paula).
