@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<title>HR Hub · Frame.io</title>
+<style>
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#1B130D;color:#FAF4E7;font:16px system-ui,-apple-system,Segoe UI,sans-serif}
+.c{text-align:center;max-width:460px;padding:30px}h1{font-size:22px;margin:12px 0}p{color:#BFB2A3;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="c"><h1 id="t">Voltando para o HR Hub…</h1><p id="x">Pode fechar esta aba depois que o HR Hub confirmar.</p></div>
+<script>
+/* Página de retorno do login do Frame.io (Adobe) para o HR Hub, o programa interno da HR Creative Hub.
+   Não guarda nada e não envia nada para lugar nenhum: só devolve o código do login para o HR Hub aberto
+   neste mesmo computador (endereço 127.0.0.1), na porta indicada no "state" que o próprio HR Hub criou. */
+(function () {
+  var q = new URLSearchParams(location.search), st = q.get("state") || "", m = /^(\d{4,5})\.[A-Za-z0-9_-]{16,}$/.exec(st);
+  var porta = m ? +m[1] : 0;
+  if (!m || porta < 1024 || porta > 65535) {
+    document.getElementById("t").textContent = "Este endereço é só para o HR Hub";
+    document.getElementById("x").textContent = "Abra o login do Frame.io pelo próprio HR Hub.";
+    return;
+  }
+  var volta = new URLSearchParams();
+  ["code", "error", "error_description"].forEach(function (k) { if (q.get(k)) volta.set(k, q.get(k)); });
+  volta.set("state", st);
+  history.replaceState(null, "", location.pathname);
+  location.replace("http://127.0.0.1:" + porta + "/frameio/volta?" + volta.toString());
+})();
+</script>
+</body>
+</html>
